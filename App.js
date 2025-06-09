@@ -1,107 +1,76 @@
-import * as React from 'react';
-import { Button, TextInput, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
+import styles from './views/estilo.js';
 
-// Screens del Primer Stack//
+import { Imagen, Saludo} from "./views/home.js";
+import { Perfil, EditarPerfil } from "./views/configuracion.js";
+import { Rellenarform, Invitaramigos } from "./views/signUp.js";
+import { Iniciarsesion, Recuperarcuenta } from "./views/logIn.js";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-function ScreenA1() {
-  const navigation = useNavigation();
+const homeStack = createNativeStackNavigator();
+const settingsStack = createNativeStackNavigator();
+const signupStack = createNativeStackNavigator();
+const loginStack = createNativeStackNavigator();
+
+function Home() {
   return (
-    <View style={styles.homeScreen}>
-      <Text style={styles.text}>HOME</Text>
-    </View>
+    <homeStack.Navigator>
+      <homeStack.Screen name="Saludo" component={Saludo} />
+      <homeStack.Screen name="Imagen" component={Imagen} />
+    </homeStack.Navigator>
   );
 }
 
-function ScreenA2() {
-  const navigation = useNavigation();
+function Settings() {
   return (
-    <View style={styles.homeScreen}>
-      <Text style={styles.text}>HOME 2</Text>
-    </View>
+    <settingsStack.Navigator>
+      <settingsStack.Screen name="Perfil" component={Perfil} />
+      <settingsStack.Screen name="Editar perfil" component={EditarPerfil} />
+    </settingsStack.Navigator>
   );
 }
 
-// Screens del Primer Stack
-function ScreenB1() {...}
-
-function ScreenB2() {...}
-
-
-// Screens del Tercer Stack
-function ScreenC1() {...}
-
-function ScreenC2() {...}
-
-
-// Creación de los stacks//
-const StackA = createNativeStackNavigator();
-
-const StackB = createNativeStackNavigator();
-
-const StackC = createNativeStackNavigator();
-
-
-function StackANavigator() {
+function Signup() {
   return (
-    <StackA.Navigator>
-      <StackA.Screen name="ScreenA1" component={ScreenA1} />
-      <StackA.Screen name="ScreenA2" component={ScreenA2} />
-    </StackA.Navigator>
+    <signupStack.Navigator>
+      <signupStack.Screen name="Registrarse" component={Rellenarform} />
+      <signupStack.Screen name="Invitar Amigos" component={Invitaramigos} />
+    </signupStack.Navigator>
   );
 }
 
-function StackBNavigator() {...}
-function StackCNavigator() {...}
+function Login() {
+  return (
+    <loginStack.Navigator>
+      <loginStack.Screen name="Iniciar sesión" component={Iniciarsesion} />
+      <loginStack.Screen name="Recuperar cuenta" component={Recuperarcuenta} />
+    </loginStack.Navigator>
+  );
+}
 
-
-// Creación del BottomTabNavigator//
 const Tab = createBottomTabNavigator();
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home"     component={StackANavigator} />
-      <Tab.Screen name="Buscador" component={StackBNavigator} />
-      <Tab.Screen name="Perfil"   component={StackCNavigator}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="person" size={24} color={color} />
-           ),
-        }}
-      />
-    </Tab.Navigator>
-  );
-}
-
-// Envolviendo la aplicación en el NavigationContainer
 export default function App() {
   return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
+    <View style={styles.container}>
+      <StatusBar style="auto" />
+
+      <SafeAreaView>
+        <Text>Hola</Text>
+      </SafeAreaView>
+
+      <NavigationContainer>
+      <Tab.Navigator style={{display: "flex"}}>
+        <Tab.Screen name="Home" component={Home} options={{title: "Home", tabBarIcon: ({color}) => <Ionicons name="home" size={24} color={color}/>}}/>
+        <Tab.Screen name="Settings" component={Settings} options={{title: "Settings", tabBarIcon: ({color}) => <Ionicons name="settings" size={24} color={color}/>}}/>
+        <Tab.Screen name="Signup" component={Signup} options={{title: "Sign up", tabBarIcon: ({color}) => <Ionicons name="person" size={24} color={color}/>}}/>
+        <Tab.Screen name="Login" component={Login} options={{title: "Log in", tabBarIcon: ({color}) => <Ionicons name="log-in" size={24} color={color}/>}}/>
+      </Tab.Navigator>
+      </NavigationContainer>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-  },
-
-  text: {
-    color: 'white',
-    fontSize: 20,
-  },
-
-  homeScreen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor:'#ff0000'
-  }
-});
