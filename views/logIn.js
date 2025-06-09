@@ -11,10 +11,10 @@ export function Iniciarsesion(){
         <Button title="Recuperar cuenta" onPress={() => navigation.navigate("Recuperar cuenta")}/>
     </View>);
 }
-  
-export function Recuperarcuenta(){
+   
+export function NoFunciona(){
     return (<View style={styles.container}>
         <TextInput placeholder="Email"/>
-        <Button title="Verificar" onPress={() => Alert.alert("Confío en que sos vos, la contraseña es info361")}/>
+        <Button title="Verificar" onPress={() => Alert.alert("No funciona")}/>
     </View>);
 }

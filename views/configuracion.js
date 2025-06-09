@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { View, Button, Text, TextInput, Image } from 'react-native';
+import { View, Button, Text, TextInput} from 'react-native';
 import styles from './estilo';
 
 

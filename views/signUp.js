@@ -11,14 +11,14 @@ export function Rellenarform(){
     <TextInput placeholder="Email"/>
     <TextInput placeholder="Contraseña" secureTextEntry={true}/>
     <TextInput placeholder="Repetir contraseña" secureTextEntry={true}/>
-    <Button title="Registrarse" onPress={() => navigation.navigate("Invitar Amigos")}/>
+    <Button title="Registrarse" onPress={() => navigation.navigate("Hecho")}/>
   </View>);
 }
   
-export function Invitaramigos(){
+export function Hecho(){
   const navigation = useNavigation();
   return (<View style={styles.container}>
     <Text>Felicidades! Ya estás registrado. =)</Text>
-    <Image source={require('../assets/feliz.jfif')} style={{ width: 250, height: 200}} />
+    <Image source={require('../assets/feliz.jpg')} style={{ width: 250, height: 200}} />
   </View>);
 }
